@@ -1,6 +1,6 @@
 {
-  "name": "nativescript-twitter",
-  "version": "2.0.0",
+  "name": "nativescript-twitter-updated",
+  "version": "2.0.2",
   "description": "NativeScript Twitter Kit for Android & IOS",
   "main": "twitter",
   "typings": "index.d.ts",
@@ -11,7 +11,7 @@
     }
   },
   "scripts": {
-    "tsc": "tsc"
+    "build": "tsc"
   },
   "author": {
     "name": "Osei Fortune",
