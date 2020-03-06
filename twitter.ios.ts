@@ -3,7 +3,7 @@ import { fromObject } from "tns-core-modules/data/observable";
 import * as http from "tns-core-modules/http";
 import * as types from "tns-core-modules/utils/types";
 import * as utils from "tns-core-modules/utils/utils";
-declare const NSJSONSerialization;
+declare const NSJSONSerialization, TWTRTwitter, TWTRAPIClient, TWTRLogInButton;
 export class TNSTwitter {
     public static init(key: string, secret: string) {
     }
@@ -22,7 +22,7 @@ export class TNSTwitter {
     public static getCurrentUser(userID: string, token?: string, tokenSecret?: string): Promise<any> {
         return new Promise((resolve, reject) => {
             const client = TWTRAPIClient.clientWithCurrentUser();
-            client.loadUserWithIDCompletion(userID, (user: TWTRUser, error) => {
+            client.loadUserWithIDCompletion(userID, (user: any, error) => {
                 if (error) {
                     reject({ message: error.localizedDescription });
                 } else {

@@ -1,6 +1,6 @@
 {
   "name": "nativescript-twitter-updated",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "description": "NativeScript Twitter Kit for Android & IOS",
   "main": "twitter",
   "typings": "index.d.ts",
