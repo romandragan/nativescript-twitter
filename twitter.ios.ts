@@ -1,8 +1,5 @@
-import { View , layout} from "tns-core-modules/ui/core/view";
-import { fromObject } from "tns-core-modules/data/observable";
-import * as http from "tns-core-modules/http";
-import * as types from "tns-core-modules/utils/types";
-import * as utils from "tns-core-modules/utils/utils";
+import { View, fromObject, Http, Utils } from "@nativescript/core";
+import * as types from "@nativescript/core/utils/types";
 declare const NSJSONSerialization, TWTRTwitter, TWTRAPIClient, TWTRLogInButton;
 export class TNSTwitter {
     public static init(key: string, secret: string) {
@@ -82,8 +79,8 @@ export class TNSTwitterButton extends View {
         return this._ios;
     }
     public onMeasure(widthMeasureSpec: number, heightMeasureSpec: number) {
-        const width = layout.getMeasureSpecSize(widthMeasureSpec);
-        const height = layout.getMeasureSpecSize(heightMeasureSpec);
+        const width = Utils.layout.getMeasureSpecSize(widthMeasureSpec);
+        const height = Utils.layout.getMeasureSpecSize(heightMeasureSpec);
         this.setMeasuredDimension(width, height);
     }
 }
@@ -92,8 +89,8 @@ export class CustomApiService {
     private _config;
     private _token;
     constructor() {
-        this._config = utils.ios.getter(TWTRTwitter, TWTRTwitter.sharedInstance).authConfig;
-        this._token = utils.ios.getter(TWTRTwitter, TWTRTwitter.sharedInstance).sessionStore.session();
+        this._config = TWTRTwitter.sharedInstance.authConfig;
+        this._token = TWTRTwitter.sharedInstance.sessionStore.session();
     }
     makeRequest(url, method, options?): Promise<any> {
         return new Promise((resolve, reject) => {

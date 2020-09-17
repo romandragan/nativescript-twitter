@@ -1,12 +1,8 @@
-import * as utils from "tns-core-modules/utils/utils";
-import * as app from "tns-core-modules/application";
-import { View } from "tns-core-modules/ui/core/view";
-import { fromObject } from "tns-core-modules/data/observable";
-import * as http from "tns-core-modules/http";
+import { View, Http, Application, fromObject, Utils, AndroidApplication, AndroidActivityResultEventData } from "@nativescript/core";
 declare const com: any, java;
 export class TNSTwitter {
     public static init(key: string, secret: string) {
-        const config = new com.twitter.sdk.android.core.TwitterConfig.Builder(utils.ad.getApplicationContext())
+        const config = new com.twitter.sdk.android.core.TwitterConfig.Builder(Utils.ad.getApplicationContext())
             .twitterAuthConfig(new com.twitter.sdk.android.core.TwitterAuthConfig(key, secret))
             .build();
         com.twitter.sdk.android.core.Twitter.initialize(config);
@@ -81,7 +77,7 @@ export class TNSTwitterButton extends View {
         return this._android;
     }
     public createNativeView() {
-        this._android = new com.twitter.sdk.android.core.identity.TwitterLoginButton(app.android.foregroundActivity);
+        this._android = new com.twitter.sdk.android.core.identity.TwitterLoginButton(Application.android.foregroundActivity);
         return this._android;
     }
     public initNativeView() {
@@ -102,7 +98,7 @@ export class TNSTwitterButton extends View {
             }
         });
         this._android.setCallback(new _cb());
-        app.android.on(app.AndroidApplication.activityResultEvent, (args: app.AndroidActivityResultEventData) => {
+        Application.android.on(AndroidApplication.activityResultEvent, (args: AndroidActivityResultEventData) => {
             this._android.onActivityResult(args.requestCode, args.resultCode, args.intent);
         })
     }
@@ -121,7 +117,7 @@ export class CustomApiService {
             try {
                 const oauth = new com.twitter.sdk.android.core.OAuthSigning(this._config, this._token);
                 const auth = oauth.getAuthorizationHeader(method, url, options ? this.buildOptions(options) : null);
-                return http.request({
+                return Http.request({
                     url: url,
                     method: method,
                     headers: {

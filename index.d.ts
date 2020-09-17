@@ -1,4 +1,4 @@
-import { View } from "tns-core-modules/ui/core/view";
+import { View } from "@nativescript/core";
 export declare class TNSTwitter {
     static init(key: string, secret: string): void;
     static getCurrentUserEmail(): Promise<any>;
